@@ -1,0 +1,1 @@
+Este repositório contém o meu treinamento do Intensivão de SQL da Hashtag Treinamentos.
