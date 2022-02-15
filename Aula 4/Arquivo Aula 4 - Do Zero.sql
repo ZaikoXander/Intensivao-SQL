@@ -6,15 +6,18 @@
 #===============  CRIAÇÃO e CONFIGURAÇÃO DO BD ===============#
 #=============================================================#
 
+USE sakila;
+
 -- O primeiro passo é CRIAR e CONFIGURAR o banco de dados 'hashtagidiomas'.
 
--- >
-
-
+CREATE DATABASE hashtagidiomas
+    DEFAULT CHARACTER SET = 'utf8mb4';
 
 # ======================== PARTE 2 ===========================#
 #===================  CRIAÇÃO DAS TABELAS ====================#
 #=============================================================#
+
+USE hashtagidiomas;
 
 -- No nosso projeto, teremos que criar 3 tabelas: cursos, alunos e vendas.
 
@@ -25,8 +28,13 @@ TABELA 1: cursos
 •	valor_curso
 */
 
--- >
+CREATE TABLE cursos(
+    id_curso INT,
+    nome_curso VARCHAR(50),
+    valor_curso DECIMAL(10, 2)
+);
 
+SELECT * FROM cursos;
 
 /*
 TABELA 2: alunos
@@ -35,7 +43,13 @@ TABELA 2: alunos
 •	email
 */
 
--- >
+CREATE TABLE alunos(
+    id_aluno INT,
+    nome_aluno VARCHAR(50),
+    email VARCHAR(50)
+);
+
+SELECT * FROM alunos;
 
 /*
 TABELA 3: vendas
@@ -45,12 +59,20 @@ TABELA 3: vendas
 •	id_aluno
 */
 
--- >
+CREATE TABLE vendas(
+    id_venda INT,
+    data_venda DATE,
+    id_curso INT,
+    id_aluno INT
+);
 
+SELECT * FROM vendas;
 
 # ======================== PARTE 3 ===========================#
 #==============  ADICIONANDO VALORES NA TABELA ===============#
 #=============================================================#
+
+USE hashtagidiomas;
 
 /*
 TABELA 1: cursos
@@ -64,7 +86,13 @@ _____________________________________
 3        | Francês    | 900         |
 */
 
--- >
+INSERT INTO cursos
+VALUES 
+    (1, 'Inglês', 1200),
+    (2, 'Espanhol', 1000),
+    (3, 'Francês', 900);
+
+SELECT * FROM cursos;
 
 /*
 TABELA 2: alunos
@@ -78,7 +106,13 @@ ________________________________________________
 3        | Pedro      | pedrinho@gmail.com    |
 */
 
--- >
+INSERT INTO alunos
+VALUES
+    (1, 'Eliane', 'eliane@gmail.com'),
+    (2, 'João', 'j.123@hotmail.com'),
+    (3, 'Pedro', 'pedrinho@gmail.com');
+
+SELECT * FROM alunos;
 
 /*
 TABELA 3: vendas
@@ -104,28 +138,53 @@ VALUES
 
 SELECT * FROM vendas;
 
-
 # ======================== PARTE 4 ===========================#
 #==============  ATUALIZANDO VALORES NA TABELA ===============#
 #=============================================================#
 
+USE hashtagidiomas;
+
 -- O valor do curso de Francês será reajustado de R$900 para R$750. Atualize o valor na tabela de cursos.
 
--- >
+SELECT * FROM cursos;
 
+UPDATE cursos
+SET valor_curso = 750
+WHERE id_curso = 3;
+
+SELECT * FROM alunos;
+
+UPDATE alunos
+SET email = 'eliane.audac@gmail.com'
+WHERE id_aluno = 1;
 
 # ======================== PARTE 5 ===========================#
 #===============  EXCLUINDO VALORES DA TABELA ================#
 #=============================================================#
 
+USE hashtagidiomas;
+
 -- Selecione a tabela de vendas. A compra do cliente 'Pedro' (id_venda = 5) foi reembolsada e por isso ela deve ser excluída do controle de vendas.
 
--- >
+SELECT * FROM vendas;
 
-# ======================== PARTE 5 ===========================#
+DELETE FROM vendas
+WHERE id_venda = 5;
+
+# ======================== PARTE 6 ===========================#
 #===========  EXCLUINDO TABELAS E BANCOS DE DADOS ============#
 #=============================================================#
 
+-- 1. CRIAÇÃO DE BANCOS DE DADOS: CREATE DATABASE
+-- 2. CRIAÇÃO DE TABLES: CREATE TABLE
+-- 3. ADICIONAR VALORES NAS TABELAS: INSERT INTO
+-- 4. ATUALIZAR VALORES DENTRO DE UMA TABELA: UPDATE
+-- 5. EXCLUIR VALORES DE UMA TABELA: DELETE FROM
+
+USE hashtagidiomas;
+
 -- Exclua a tabela vendas e em seguida o banco de dados hashtagidiomas.
 
--- >
+DROP TABLE vendas;
+
+DROP DATABASE hashtagidiomas;
