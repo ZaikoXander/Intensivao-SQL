@@ -1,1 +1,3 @@
 *.sql linguist-detectable=true
+Aula 1/bd_aula1/*.sql linguist-detectable=false
+Aula 2/bd_aula2/*.sql linguist-detectable=false
